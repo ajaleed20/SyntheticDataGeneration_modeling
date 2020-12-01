@@ -197,8 +197,6 @@ def printAnswers(answers):
     df = shuffle(df)
     print("shuffled data frame:\n")
     print(df)
-
-
     #df_repeat = df.sample(n=len(df), replace=True)
 
     #print(df_repeat)
