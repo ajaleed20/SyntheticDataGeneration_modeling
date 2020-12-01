@@ -311,7 +311,7 @@ def prepare_data_mlp(data, features, lag_time_steps, lead_time_steps, test_split
 def get_learning_curve_and_forecast(model, x_inputs, x_outputs, trainY, testX, testY, lead_time_step, lag_time_steps,
                                     features, forecast_input, confidence_interval_multiple_factor ,normalize_data= False,  normalizer= None, power_transformers= None):
 
-        history = model.fit(x_inputs, trainY, epochs=100, verbose=2, validation_data=(x_outputs, testY))
+        history = model.fit(x_inputs, trainY, epochs=300, verbose=2, validation_data=(x_outputs, testY))
         # plt.plot(history.history['loss'], label='train')
         # plt.plot(history.history['val_loss'], label='test')
         # plt.legend()
@@ -362,7 +362,7 @@ def cal_rmse(model, x_outputs, testX, testY, lead_time_steps,
                                                           features)
             testY_transformed[:, i] = raw_test_data.reshape(1, -1)
 
-    rmse, rmse_list = helper_service.rmse_time_series(testY_transformed, forecast)
+    rmse, rmse_list = rmse_time_series(testY_transformed, forecast)
 
     return rmse, rmse_list
 
@@ -430,6 +430,12 @@ def get_data(df, start_period, end_period, granularity_level = GranularityLevel.
         return res_df
 
 
+def rmse_time_series(y_true, y_pred):
+    rmses = []
+    for i in range(y_true.shape[1]):
+        rmse = np.sqrt(metrics.mean_squared_error(y_true[:,i], y_pred[:,i]))
+        rmses.append(rmse)
+    return sum(rmses)/len(rmses), rmses
 
 
 def send_values(lead,lag):
