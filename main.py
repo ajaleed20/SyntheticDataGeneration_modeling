@@ -1,5 +1,6 @@
 import easygui
 import tkinter as tk
+from scipy.stats import norm
 from datetime import datetime, date, time, timedelta
 import time
 import matplotlib.pyplot as plt
@@ -259,9 +260,9 @@ def get_mlp_model(x_inputs, lag_time_steps, lead_time_steps):
     dense_layers = []
     for i in range(len(x_inputs)):
         visible = Input(shape=(lag_time_steps,))
-        hidden0 = Dense(200, activation='relu')(visible)  # sigmoid #tanh #relu
+        hidden0 = Dense(100, activation='relu')(visible)  # sigmoid #tanh #relu
         dropout0 = Dropout(0.5)(hidden0)
-        hidden1 = Dense(100, activation='relu')(dropout0)  # sigmoid #tanh #relu
+        hidden1 = Dense(50, activation='relu')(dropout0)  # sigmoid #tanh #relu
         dropout1 = Dropout(0.5)(hidden1)
         dense = Dense(50, activation='relu')(dropout1)  # relu #sigmoid #tanh
         input_models.append(visible)
@@ -272,9 +273,9 @@ def get_mlp_model(x_inputs, lag_time_steps, lead_time_steps):
     else:
         merge = dense_layers[0]
 
-    hidden1 = Dense(len(x_inputs) * 32, activation='relu')(merge)  # sigmoid #tanh #relu
+    hidden1 = Dense(len(x_inputs) * 16, activation='relu')(merge)  # sigmoid #tanh #relu
     dropout1 = Dropout(0.1)(hidden1)
-    hidden2 = Dense(len(x_inputs) * 16, activation='relu')(dropout1)  # relu #sigmoid #tanh
+    hidden2 = Dense(len(x_inputs) * 8, activation='relu')(dropout1)  # relu #sigmoid #tanh
     dropout2 = Dropout(0.5)(hidden2)
     hidden3 = Dense(len(x_inputs), activation='relu')(dropout2)  # relu #sigmoid #tanh
     dropout3 = Dropout(0.1)(hidden3)
