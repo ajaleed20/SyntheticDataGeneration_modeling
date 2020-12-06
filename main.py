@@ -22,8 +22,6 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from util.enums import GranularityLevel,InputEnums
 from Model.MLP_Regression import executeRegression
-#from input_lag_lead import input_lead_lag
-
 
 
 class App(tk.Frame):
