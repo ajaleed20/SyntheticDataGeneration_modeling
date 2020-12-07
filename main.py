@@ -202,7 +202,13 @@ def printAnswers(answers):
                                                                        InputEnums.confidence_interval_multiple_factor.value)
 
     np.savetxt("forecast-value.csv",forecast, delimiter=",")
-    print("end")
+    print("forecast values:\n")
+    print(forecast)
+    print("rmse_list:\n")
+    print(rmse_list)
+    print("\nrmse:")
+    print(rmse)
+    print("end of program")
 
 def get_freq_by_level(granularity_level_value):
     if GranularityLevel.one_hour.value[0] == granularity_level_value:
