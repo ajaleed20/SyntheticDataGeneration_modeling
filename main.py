@@ -201,6 +201,7 @@ def printAnswers(answers):
                                                                        InputEnums.lag_time_steps.value, InputEnums.lead_time_steps.value, InputEnums.test_train_split_size.value,
                                                                        InputEnums.confidence_interval_multiple_factor.value)
 
+    np.savetxt("forecast-value.csv",forecast, delimiter=",")
     print("end")
 
 def get_freq_by_level(granularity_level_value):
@@ -250,3 +251,4 @@ if __name__ == '__main__':
     #root.geometry("".format(positionRight, positionDown))
     App(root).grid()
     root.mainloop()
+
