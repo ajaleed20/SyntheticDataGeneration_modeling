@@ -109,6 +109,12 @@ def printAnswers(answers):
         deltadate = sdate - edate
         deltadate = abs(deltadate)
         print(deltadate.days)
+
+        if deltadate.days <= (InputEnums.lead_time_steps.value + InputEnums.lag_time_steps.value):
+            ctypes.windll.user32.MessageBoxW(0,"Start and End Dates Delta must be >= Lead+Lag timesteps provided!\n",
+                                             "ERROR MESSAGE", 1)
+            exit(0)
+
     except ValueError as e:
         ctypes.windll.user32.MessageBoxW(0,str(e),"ERROR MESSAGE", 1)
         print(e)
